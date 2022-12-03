@@ -17,35 +17,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
 
-
     @IBAction func keyPressed(_ sender: UIButton) {
-        playSound()
-        print("logging")
+        playSound(titleLabel: sender.currentTitle!)
     }
     
-    func playSound() {
-        guard let path = Bundle.main.path(forResource: "C", ofType:"wav") else {
-
-        return }
-
-        let url = URL(fileURLWithPath: path)
-
-        do {
-
-        player = try AVAudioPlayer(contentsOf: url)
-
-        player?.play()
-
-
-
-        } catch let error {
-
-        print(error.localizedDescription)
-
-        }
-
-
+    func playSound(titleLabel: String) {
+        let url = Bundle.main.url(forResource: titleLabel, withExtension: "wav")
+        player = try! AVAudioPlayer(contentsOf: url!)
+        player.play()
+                
     }
-    
 }
-
